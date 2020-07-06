@@ -1,0 +1,48 @@
+<mat-form-field class="pl-2 pr-2 pt-2">
+  <input matInput (keyup)="applySearch($event.target.value)" [disabled]="!!disabled" placeholder="Search" />
+</mat-form-field>
+
+<div class="school-users-table">
+  <table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Code</th>
+      <td mat-cell *matCellDef="let row">{{ row.code }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fullName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</th>
+      <td mat-cell *matCellDef="let row">
+        <a [routerLink]="['/users', row.code]"> {{ row.firstName }} {{ row.lastName }} </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="school">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>School</th>
+      <td mat-cell *matCellDef="let row">
+        <a *ngIf="getSchoolCode(row.school)" [routerLink]="['/school', getSchoolCode(row.school)]"> {{ getSchoolName(row.school) }} </a>
+        <div *ngIf="!getSchoolCode(row.school)" class="text-muted">{{ getSchoolName(row.school) }}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+      <td mat-cell *matCellDef="let row">{{ getCategory(row.category) }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastStatusId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Status</th>
+      <td mat-cell *matCellDef="let row">{{ getStatus(row.lastStatusId) }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+      <td mat-cell *matCellDef="let row">
+        <span><i-feather name="trash"></i-feather></span></td
+    ></ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

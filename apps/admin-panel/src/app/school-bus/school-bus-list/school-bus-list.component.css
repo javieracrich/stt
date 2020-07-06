@@ -1,0 +1,9 @@
+table {
+  width: 100%;
+}
+
+.btn-fix{
+  width: 2.5em;
+  height: 2.5em;
+  margin-left: 0.5em;
+}

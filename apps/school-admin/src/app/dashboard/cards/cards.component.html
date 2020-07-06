@@ -1,0 +1,62 @@
+<div class="row mb-3">
+  <div class="col-md-4">
+    <div class="card border-bottom card-shadow border-success">
+      <div class="card-body">
+        <div class="px-3 py-3">
+          <div class="media">
+            <div class="media-body text-left">
+              <h3 class="text-success font-weight-bold mb-1" *ngIf="assistance >= 0">{{ assistance }}</h3>
+              <h3 *ngIf="assistance == -1" class="lds-ring">
+                <div></div>
+              </h3>
+              <span class="text-success">CURRENT ASSISTANCE</span>
+            </div>
+            <div class="media-right align-self-center">
+              <i-feather name="check-circle" class="big text-success float-right"></i-feather>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card border-bottom card-shadow border-warning">
+      <div class="card-body">
+        <div class="px-3 py-3">
+          <div class="media">
+            <div class="media-body text-left">
+              <h3 class="text-warning font-weight-bold mb-1" *ngIf="attachedCardsCount >= 0">{{ attachedCardsCount }}</h3>
+              <h3 *ngIf="attachedCardsCount == -1" class="lds-ring">
+                <div></div>
+              </h3>
+              <span class="text-warning">ATTACHED TAGS</span>
+            </div>
+            <div class="media-right align-self-center">
+              <i-feather name="git-pull-request" class="big text-warning float-right"></i-feather>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card border-bottom card-shadow border-danger">
+      <div class="card-body">
+        <div class="px-3 py-3">
+          <div class="media">
+            <div class="media-body text-left">
+              <h3 class="text-danger font-weight-bold mb-1" *ngIf="alerts >= 0">{{ alerts }}</h3>
+              <h3 *ngIf="alerts == -1" class="lds-ring">
+                <div></div>
+              </h3>
+              <span class="text-danger">ALERTS</span>
+            </div>
+            <div class="media-right align-self-center">
+              <i-feather name="alert-circle" class="big text-danger float-right"></i-feather>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

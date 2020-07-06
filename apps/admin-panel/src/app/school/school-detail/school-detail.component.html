@@ -1,0 +1,58 @@
+<input type="file" style="display: none" #file (change)="onFileChanged($event)" />
+<div class="row">
+  <div class="col-6">
+    <h1 class="pt-1 school-name">{{ school?.name }}</h1>
+  </div>
+  <div class="col-6 d-none d-xl-block d-lg-block">
+    <img class="school-logo" *ngIf="school?.logoUrl" [src]="school.logoUrl" />
+  </div>
+</div>
+
+<div class="row">
+  <div class="map"></div>
+</div>
+
+<div class="row">
+  <div class="col-12"><strong>Phone</strong> {{ school?.phone }}</div>
+  <div class="col-12"><strong>Email</strong> {{ school?.email }}</div>
+  <div class="col-12"><strong>Address</strong> {{ school?.address }}</div>
+  <div class="col-12 mt-2">
+    <button mat-button (click)="openEditSchoolDialog()">
+      <i-feather name="edit-2" class="info"></i-feather>
+      Edit
+    </button>
+    <button class="ml-2" [disabled]="uploading" mat-button (click)="file.click()">
+      <i-feather name="upload-cloud" class="info"></i-feather>
+      {{ uploadText }}
+    </button>
+  </div>
+</div>
+
+<div class="row mt-3 mb-5">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-4">
+        <mat-form-field class="w-100">
+          <mat-select placeholder="Select Room" [(ngModel)]="selectedRoom" (selectionChange)="refreshSchoolUsers()">
+            <mat-option *ngFor="let room of rooms$ | async" [value]="room.code">
+              {{ getRoomName(room) }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-8 mt-3 text-right">
+        <button mat-raised-button color="primary">
+          <i-feather name="plus"></i-feather>
+          Add Student
+        </button>
+      </div>
+    </div>
+
+    <stt-school-users
+      (userDetached)="refreshSchoolUsers()"
+      [displayedColumns]="['fullName', 'category', 'lastStatusId']"
+      [dataSource]="usersDataSource"
+    >
+    </stt-school-users>
+  </div>
+</div>

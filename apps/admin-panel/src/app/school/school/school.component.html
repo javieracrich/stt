@@ -1,0 +1,17 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a routerLink="/" class="text-info">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">School</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-12">
+    <div class="mb-3 text-right">
+      <button (click)="openAddSchoolDialog()" mat-raised-button color="primary"><i-feather name="plus"></i-feather> Add School</button>
+    </div>
+    <stt-school-list> </stt-school-list>
+  </div>
+</div>

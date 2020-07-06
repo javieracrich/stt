@@ -1,0 +1,82 @@
+<div class="container-fluid">
+  <div class="row mt-3">
+    <div class="col-lg-3">
+      <div class="text-center">
+        <ng-container *ngIf="user?.photoUrl; else nophoto">
+          <img *ngIf="user" [src]="user.photoUrl" class="avatar img-circle user-photo" alt="avatar" />
+        </ng-container>
+        <ng-template #nophoto>
+          <img src="//placehold.it/100" class="avatar img-circle user-photo" alt="avatar" />
+        </ng-template>
+
+        <input type="file" style="display: none" #file (change)="onFileChanged($event)" />
+        <button (click)="file.click()" [disabled]="uploading" mat-button>{{ uploadText }}</button>
+      </div>
+    </div>
+
+    <div class="col-lg-9 ">
+      <h3>Personal info</h3>
+      <div class="row mt-5">
+        <div class="col-lg-2">
+          <label class=" control-label float-right text-right font-weight-bold">Name</label>
+        </div>
+        <div class="col-lg-9">{{ user?.firstName }} {{ user?.lastName }}</div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-2">
+          <label class=" control-label float-right text-right font-weight-bold">User Category</label>
+        </div>
+        <div class="col-lg-9">
+          {{ getCategory(user?.category) }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-2">
+          <label class=" control-label float-right text-right font-weight-bold">School</label>
+        </div>
+        <div class="col-lg-9">
+          <a *ngIf="user" [routerLink]="['/school', user?.school.code]"> {{ user?.school.name }}</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-2">
+          <label class=" control-label float-right  text-right font-weight-bold">Email</label>
+        </div>
+        <div class="col-lg-9">
+          {{ user?.email }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-2">
+          <label class=" control-label float-right text-right font-weight-bold">Phone</label>
+        </div>
+        <div class="col-lg-9">
+          {{ user?.phone }}
+        </div>
+      </div>
+
+      <div *ngIf="userIsStudent()" class="row">
+        <div class="col-lg-2">
+          <label class=" control-label float-right text-right font-weight-bold">Cards</label>
+        </div>
+        <div *ngIf="user" class="col-lg-9">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action" *ngFor="let card of user?.cards">
+              <a [routerLink]="['/card', card.cardCode]">{{ card.name }}</a>
+            </li>
+          </ul>
+          <div *ngIf="user.cards.length == 0">[Student does not have a card attached]</div>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <button mat-raised-button class="m-3" (click)="openEditUserDialog()" color="primary">Edit User</button>
+        <button mat-raised-button class="m-3" (click)="openDeleteUserDialog()" color="warn">Delete User</button>
+      </div>
+    </div>
+  </div>
+</div>

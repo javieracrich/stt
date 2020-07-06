@@ -1,0 +1,18 @@
+<div class="col-lg-5">
+  Upload a text file with card codes to bulk insert. Make sure the file has one code per line. This operation may take some minutes to
+  complete. Please be patient.
+</div>
+
+<input type="file" style="display: none" #file (change)="onFileChanged($event)" />
+<button (click)="file.click()" color="primary" class="m-2" [disabled]="uploading" mat-raised-button>
+  <i class="ft-upload"></i> {{ uploadText }}
+</button>
+
+<h5 class="text-danger" *ngIf="results && results.length > 0">The following codes had problems and were not saved</h5>
+<ul>
+  <li class="mt-1" *ngFor="let r of results">
+    <div>code: {{ r.cardCode }}</div>
+    <div>error: {{ r.error }}</div>
+  </li>
+</ul>
+<h5 *ngIf="results && results.length == 0" class="text-success">All codes were saved succesfully</h5>

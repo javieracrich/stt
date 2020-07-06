@@ -1,0 +1,63 @@
+<div class="row mt-4">
+  <div class="col">
+    <h3>Select alert type</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col"></div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="alert-field w-100">
+                <mat-select [formControl]="alertType" placeholder="Alert Type" class="w-100" required [(ngModel)]="selectedAlertId">
+                  <mat-option *ngFor="let alert of alertTypes" [value]="alert.id">{{ alert.name }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="alertType.hasError('required')">Please choose an alert type</mat-error>
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Message" [(ngModel)]="message" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="w-100">
+                <mat-select placeholder="Who should we send the alert to?"  [(ngModel)]="who" multiple>
+                  <mat-option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button class="w-100 mt-2" mat-raised-button color="primary" [disabled]="sendAlertDisabled" (click)="sendAlert()">
+                {{ sendAlertButtonText }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4 class="mt-3">Alerts History</h4>
+<div *ngIf="alerts.length > 0; else noalerts" class="row h-100">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="alert mb-3" *ngFor="let alert of alerts">
+            <span>{{ alert.dateTime | date: 'short' }}</span>
+            <h5>{{ alert.message }}</h5>
+            <div>sent to: {{ getCategoryNames(alert.userCategories) }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noalerts>
+  <div class="row">
+    <div class="col">
+      <div>No alerts found</div>
+    </div>
+  </div>
+</ng-template>

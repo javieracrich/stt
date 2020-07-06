@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+}
+
+.btn-fix{
+  width: 2.5em;
+  height: 2.5em;
+  margin-left: 0.5em;
+}
+mat-icon i{
+  width: 2.5em;
+  height: 2.5em;
+  margin-left: -1em;
+  margin-top:0.2em;
+  font-size: 1em;
+  display: block;
+}

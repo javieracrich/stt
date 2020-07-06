@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1 mat-dialog-title>Edit User</h1>
+  <div mat-dialog-content>
+    <div>
+      <mat-form-field>
+        <input
+          matInput
+          formControlName="firstName"
+          placeholder="First Name"
+          [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+        />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="lastName" placeholder="Last Name" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="phone" placeholder="Phone" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="email" placeholder="Email" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button type="button" mat-button (click)="close()">Cancel</button>
+    <button [disabled]="loading || !form.valid" mat-button color="primary" cdkFocusInitial>Save</button>
+  </div>
+</form>

@@ -1,0 +1,11 @@
+.alert-field {
+  width: 400px;
+}
+.alert-btn {
+  width: 130px;
+  height: 130px;
+}
+
+.alert{
+  border-bottom: 1px solid #d1d1d1;
+}

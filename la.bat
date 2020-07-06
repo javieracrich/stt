@@ -1,0 +1,1 @@
+ng lint admin-panel

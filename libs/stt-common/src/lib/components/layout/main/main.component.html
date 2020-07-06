@@ -1,0 +1,43 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="!mobileQuery.matches ? 'dialog' : 'navigation'"
+    [mode]="mobileQuery.matches ? 'over' : 'side'"
+    [opened]="!mobileQuery.matches"
+  >
+    <mat-nav-list>
+      <img class="logo-img m-2 ml-3 mb-3 mt-3" src="../../../assets/img/logo.png" width="117" height="33" />
+      <a *ngFor="let l of linkData" mat-list-item [routerLink]="l.link" routerLinkActive="active">
+        <i-feather name="{{ l.icon }}" class="mr-3"></i-feather> {{ l.text }}</a
+      >
+    </mat-nav-list>
+
+    <span class="sidebar-gradient"></span>
+    <span class="sidebar-background"></span>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="sidebar-color mb-3">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="mobileQuery.matches">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <button Position="end" mat-button [matMenuTriggerFor]="menu">{{ schoolName }} - {{ username }}</button>
+      <mat-menu xPosition="before" #menu="matMenu">
+        <!-- <button mat-menu-item>Notifications</button> -->
+        <button (click)="logout()" title="log out" mat-menu-item>
+          Log out
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <!-- Add Content Here -->
+    <div class="container-fluid">
+      <router-outlet>
+        <mat-spinner *ngIf="showLoader" class="loading"></mat-spinner>
+      </router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,14 @@
+.school-users-table{
+  height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 100%;
+  display: block;
+  background-color: #fff;
+}

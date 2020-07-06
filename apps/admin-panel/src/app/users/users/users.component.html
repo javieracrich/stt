@@ -1,0 +1,51 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a routerLink="/" class="text-info">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Users</li>
+  </ol>
+</nav>
+<div class="row">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-lg-3">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedSchoolCode" (selectionChange)="onSelectSchool()" placeholder="Select School">
+            <mat-option *ngFor="let school of schools | async" [value]="school.code">
+              {{ school.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-3">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedUserCategory" placeholder="Select User Type">
+            <mat-option *ngFor="let cat of categories" [value]="cat.id">
+              {{ cat.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-3" *ngIf="studentsSelected()">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedRoomCode" placeholder="Select Grade Room">
+            <mat-option *ngFor="let room of rooms$ | async" [value]="room.code">
+              {{ getRoomName(room) }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-3">
+        <div class="text-right">
+          <button type="button" color="primary" class="mb-1 mt-1" (click)="refreshSchoolUsers()" mat-raised-button>
+            <i-feather name="search"></i-feather>
+            Search User
+          </button>
+        </div>
+      </div>
+    </div>
+    <stt-school-users [disabled]="!!!selectedSchoolCode" (userDetached)="refreshSchoolUsers()" [dataSource]="usersDataSource">
+    </stt-school-users>
+  </div>
+</div>

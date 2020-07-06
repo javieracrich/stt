@@ -1,0 +1,254 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "admin-panel": {
+      "root": "apps/admin-panel/",
+      "sourceRoot": "apps/admin-panel/src",
+      "projectType": "application",
+      "prefix": "stt-nx-workspace",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/admin-panel",
+            "index": "apps/admin-panel/src/index.html",
+            "main": "apps/admin-panel/src/main.ts",
+            "polyfills": "apps/admin-panel/src/polyfills.ts",
+            "tsConfig": "apps/admin-panel/tsconfig.app.json",
+            "assets": ["apps/admin-panel/src/favicon.ico", "apps/admin-panel/src/assets"],
+            "styles": ["apps/admin-panel/src/styles.scss"],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/admin-panel/src/environments/environment.ts",
+                  "with": "apps/admin-panel/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "admin-panel:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "admin-panel:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "admin-panel:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/admin-panel/tsconfig.app.json", "apps/admin-panel/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!apps/admin-panel/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/admin-panel/jest.config.js",
+            "tsConfig": "apps/admin-panel/tsconfig.spec.json",
+            "setupFile": "apps/admin-panel/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "admin-panel-e2e": {
+      "root": "apps/admin-panel-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/admin-panel-e2e/cypress.json",
+            "tsConfig": "apps/admin-panel-e2e/tsconfig.e2e.json",
+            "devServerTarget": "admin-panel:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "admin-panel:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/admin-panel-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**", "!apps/admin-panel-e2e/**"]
+          }
+        }
+      }
+    },
+    "school-admin": {
+      "root": "apps/school-admin/",
+      "sourceRoot": "apps/school-admin/src",
+      "projectType": "application",
+      "prefix": "stt-nx-workspace",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/school-admin",
+            "index": "apps/school-admin/src/index.html",
+            "main": "apps/school-admin/src/main.ts",
+            "polyfills": "apps/school-admin/src/polyfills.ts",
+            "tsConfig": "apps/school-admin/tsconfig.app.json",
+            "assets": ["apps/school-admin/src/favicon.ico", "apps/school-admin/src/assets"],
+            "styles": ["apps/school-admin/src/styles.scss"],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/school-admin/src/environments/environment.ts",
+                  "with": "apps/school-admin/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "school-admin:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "school-admin:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "school-admin:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/school-admin/tsconfig.app.json", "apps/school-admin/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!apps/school-admin/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/school-admin/jest.config.js",
+            "tsConfig": "apps/school-admin/tsconfig.spec.json",
+            "setupFile": "apps/school-admin/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "school-admin-e2e": {
+      "root": "apps/school-admin-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/school-admin-e2e/cypress.json",
+            "tsConfig": "apps/school-admin-e2e/tsconfig.e2e.json",
+            "devServerTarget": "school-admin:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "school-admin:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/school-admin-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**", "!apps/school-admin-e2e/**"]
+          }
+        }
+      }
+    },
+    "stt-common": {
+      "root": "libs/stt-common",
+      "sourceRoot": "libs/stt-common/src",
+      "projectType": "library",
+      "prefix": "stt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/stt-common/tsconfig.lib.json", "libs/stt-common/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/stt-common/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/stt-common/jest.config.js",
+            "tsConfig": "libs/stt-common/tsconfig.spec.json"
+          }
+        }
+      },
+      "schematics": {}
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {},
+  "defaultProject": "admin-panel"
+}

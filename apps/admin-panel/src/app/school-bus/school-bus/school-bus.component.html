@@ -1,0 +1,30 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/" class="text-info">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">School Bus</li>
+  </ol>
+</nav>
+<div class="row">
+  <div class="col-4">
+    <mat-form-field class="w-100">
+      <mat-select [(ngModel)]="selectedSchoolCode" (selectionChange)="onSelectSchool()" placeholder="Select school">
+        <mat-option *ngFor="let school of schools | async" [value]="school.code">
+          {{ school.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-8 mt-3 text-right">
+    <button (click)="OpenAddSchoolBusDialog()" mat-raised-button color="primary">
+      <i-feather name="plus"></i-feather>
+      Add School Bus
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <stt-school-bus-list (busDeleted)="onBusDeleted()" [dataSource]="busDataSource"> </stt-school-bus-list>
+  </div>
+</div>

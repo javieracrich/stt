@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/" class="text-info">Home</a></li>
+      <li class="breadcrumb-item" aria-current="page">Users</li>
+      <li class="breadcrumb-item active" aria-current="page">Add User</li>
+    </ol>
+  </nav>
+  <div class="row mt-3">
+    <div class="col-12">
+      <h4 class="form-section"><i-feather name="user"></i-feather> Personal Info</h4>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field class="col-12">
+              <mat-select (selectionChange)="onUserCategoryChange()" formControlName="userCategory" placeholder="User Type">
+                <mat-option *ngFor="let cat of categories" [value]="cat.id">
+                  {{ cat.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-6">
+              <input formControlName="firstName" matInput placeholder="First Name" />
+            </mat-form-field>
+            <mat-form-field class="col-6">
+              <input matInput formControlName="lastName" placeholder="Last Name" />
+            </mat-form-field>
+            <mat-form-field class="col-6">
+              <input matInput formControlName="phone" placeholder="Phone" />
+            </mat-form-field>
+
+            <mat-form-field *ngIf="showSchoolField" class="col-12">
+              <mat-select formControlName="schoolCode" (selectionChange)="onSchoolChange()" placeholder="Select School">
+                <mat-option *ngFor="let school of schools | async" [value]="school.code">
+                  {{ school.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="showParentField" class="col-12">
+              <input matInput autofocus [matAutocomplete]="parent" formControlName="parent" placeholder="Search Parent" />
+            </mat-form-field>
+
+            <mat-autocomplete #parent="matAutocomplete" (optionSelected)="onParentSelected()" [displayWith]="displayParentFullName">
+              <mat-option *ngFor="let parent of parents | async" [value]="parent">
+                <span class="float-left">{{ parent.firstName + ' ' + parent.lastName }} </span>
+              </mat-option>
+            </mat-autocomplete>
+
+            <mat-form-field *ngIf="showSchoolBusField" class="col-12">
+              <mat-select (selectionChange)="onBusChange($event)" formControlName="bus" placeholder="Select School Bus">
+                <mat-option *ngFor="let bus of buses | async" [value]="bus.code">
+                  {{ bus.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div *ngIf="showAccessFields" class="row">
+          <div class="col-12">
+            <h4 class="form-section mt-3"><i-feather name="key"></i-feather> Access</h4>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="col-6">
+              <input formControlName="email" matInput placeholder="Email" />
+            </mat-form-field>
+            <mat-form-field class="col-6">
+              <input formControlName="password" matInput placeholder="Password" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div align="start">
+          <button mat-button routerLink="/users" class="mr-1">Cancel</button>
+          <button [disabled]="form.invalid" mat-raised-button class="text-white ml-1" color="primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

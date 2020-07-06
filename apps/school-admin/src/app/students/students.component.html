@@ -1,0 +1,44 @@
+<h3 class="mt-3">Students</h3>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="row">
+        <div class="col col-md-3">
+          <mat-form-field class="w-100 m-3">
+            <mat-select [(ngModel)]="selectedSchool" placeholder="Select School" (selectionChange)="onSelectSchool($event)">
+              <mat-option *ngFor="let school of schools$ | async" [value]="school.code">
+                {{ school.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col col-md-3">
+          <mat-form-field class="w-100 m-3">
+            <mat-select placeholder="Select Room" [(ngModel)]="selectedRoom">
+              <mat-option *ngFor="let room of rooms$ | async" [value]="room.code">
+                {{ getRoomName(room) }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="col-12 text-right">
+            <button (click)="search()" class="btn-block mb-3" color="primary" [disabled]="selectedRoom == null" mat-raised-button>
+              <span>
+                <i-feather name="search"></i-feather>
+              </span>
+              <span> Search Students</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <stt-student-list [data]="users$ | async"></stt-student-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+  <!-- BusName Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Bus Name</th>
+    <td mat-cell *matCellDef="let row">
+      <a [routerLink]="['/school-bus', row.code]">{{ row.name }}</a>
+    </td>
+  </ng-container>
+
+  <!-- Patent Column -->
+  <ng-container matColumnDef="patent">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Bus Patent</th>
+    <td mat-cell *matCellDef="let row">{{ row.patent }}
+    </td>
+  </ng-container>
+  
+  <!-- Institution Column -->
+  <ng-container matColumnDef="school">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Institution</th>
+    <td mat-cell *matCellDef="let row">{{ row.school?.name }}</td>
+  </ng-container>
+
+  <!-- Drivers Column -->
+  <ng-container matColumnDef="driver">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Drivers</th>
+    <td mat-cell *matCellDef="let row">{{ row.driver }}</td>
+  </ng-container>
+
+  <!-- Supervisor Column -->
+  <ng-container matColumnDef="supervisor">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Supervisor</th>
+    <td mat-cell *matCellDef="let row">{{ row.supervisor }}</td>
+  </ng-container>
+
+  <!-- Supervisor Column -->
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+    <td mat-cell *matCellDef="let row">
+      <button class="btn btn-light" type="button" Position="above after" id="{{ row.action }}" mat-icon-button>
+        <span><i-feather name="map-pin" class="text-info"></i-feather></span>
+      </button>
+      <button
+        class="btn btn-light ml-1 "
+        type="button"
+        Position="above after"
+        id="{{ row.action }}"
+        (click)="openDeleteSchoolBusDialog(row.code)"
+        mat-icon-button
+      >
+        <span><i-feather name="trash" class="text-danger"></i-feather></span>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

@@ -1,0 +1,7 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node", "jest"]
+  },
+  "include": ["**/*.ts", "../../libs/stt-common/src/lib/services/token.service.spec.ts", "../../libs/stt-common/src/lib/services/alert.service.spec.ts", "../../libs/stt-common/src/lib/services/alert.service.ts"]
+}
